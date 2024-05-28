@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\SendResetLinkRequest;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests\HandleLogin;
 use App\Http\Controllers\Controller;
@@ -30,5 +32,21 @@ class AdminAuthenticationController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('admin.login');
+    }
+
+    public function forgotPassword()
+    {   
+        return view('admin.auth.forgot-password');
+    }
+
+    public function sendResetLink(SendResetLinkRequest $request)
+    {
+        $token = \Str::random(64);
+
+        $admin = Admin::where('email', $request->email)->first();
+        $admin->password_reset_token = $token;
+        $admin->save();
+
+        
     }
 }
