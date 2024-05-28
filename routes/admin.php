@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminAuthenticationController;
 
 Route::group(["prefix" => "/admin", "as" => "admin."], function () {
     Route::get("/login", [AdminAuthenticationController::class, "login"])->name("login");
+    Route::post("/logout", [AdminAuthenticationController::class, "logout"])->name("logout");
     Route::post("/login", [AdminAuthenticationController::class, "handleLogin"])->name("handle-login");
 });
 
