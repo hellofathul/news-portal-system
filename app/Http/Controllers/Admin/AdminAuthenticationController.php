@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\SendResetLinkRequest;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Requests\HandleLogin;
 use App\Http\Controllers\Controller;
+use App\Mail\AdminSendResetLinkMail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\SendResetLinkRequest;
+use App\Http\Requests\AdminResetPasswordRequest;
 
 class AdminAuthenticationController extends Controller
 {
@@ -47,6 +51,28 @@ class AdminAuthenticationController extends Controller
         $admin->password_reset_token = $token;
         $admin->save();
 
-        
+        Mail::to($request->email)->send(new AdminSendResetLinkMail($token, $request->email));
+
+        return redirect()->back()->with('success','Link has been sent to your email.');
+    }
+
+    public function resetPassword($token) 
+    {
+        return view("admin.auth.reset-password", compact("token"));
+    }
+
+    public function storePassword(AdminResetPasswordRequest $request)
+    {
+        $admin = Admin::where(["email" => $request->email, "password_reset_token" => $request->token])->first();
+
+        if(!$admin) {
+            return back()->with("error","Token is invalid");
+        }
+
+        $admin->password = Hash::make($request->password);
+        $admin->password_reset_token = null;
+        $admin->save();
+
+        return redirect()->route("admin.login")->with("success","Password reset successful!");
     }
 }

@@ -57,6 +57,9 @@
                                         @error('email')
                                             <code>{{  $message  }}</code>
                                         @enderror
+                                        @if (session()->has("success"))
+                                            <i><b style="color: green;">{{  session()->get("success")  }}</b></i>
+                                        @endif
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">

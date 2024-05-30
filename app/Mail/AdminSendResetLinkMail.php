@@ -13,12 +13,16 @@ class AdminSendResetLinkMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $token;
+    public $email;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($token, $email)
     {
-        //
+        $this->token = $token;
+        $this->email = $email;
     }
 
     /**
@@ -27,7 +31,7 @@ class AdminSendResetLinkMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Admin Send Reset Link Mail',
+            subject: 'Laravel Admin Password Reset',
         );
     }
 
@@ -37,7 +41,7 @@ class AdminSendResetLinkMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mail.admin-reset-link-mail',
         );
     }
 
