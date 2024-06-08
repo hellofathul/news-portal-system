@@ -18,32 +18,47 @@
         <div class="row mt-sm-4">
             <div class="col-12 col-md-6">
                 <div class="card">
-                    <form method="post" class="needs-validation" novalidate="">
+                    <form method="post" class="needs-validation" novalidate=""
+                        action="{{  route("admin.profile.update", auth()->guard("admin")->user()->id) }}"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method("put")
                         <div class="card-header">
                             <h4>{{__("Edit Profile")}}</h4>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="form-group col-12">
+                                <div class="form-group col-12 mb-0">
                                     <label>{{__("Upload Image")}}</label>
                                     <div id="image-preview" class="image-preview" style="width: 100%;">
                                         <label for="image-upload" id="image-label">{{__("Choose File")}}</label>
                                         <input type="file" name="image" id="image-upload" />
                                     </div>
+                                    @error("image")
+                                        <p class="text-danger mb-0 mt-2">{{ $message }}</p>
+                                    @enderror
                                 </div>
-                                <div class="form-group col-12">
+                                <div class="form-group col-12 mt-2">
                                     <label>{{__("Name")}}</label>
-                                    <input type="text" class="form-control" required="" value="{{ $user->name }}">
+                                    <input type="text" class="form-control" required="" name="name"
+                                        value="{{ $user->name }}">
                                     <div class="invalid-feedback">
                                         {{__("Please fill in the first name")}}
                                     </div>
+                                    @error("name")
+                                        <p class="invalid-feedback">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="form-group col-12">
                                     <label>{{__("Email")}}</label>
-                                    <input type="text" class="form-control" required="" value="{{ $user->email }}">
+                                    <input type="text" class="form-control" required="" name="email"
+                                        value="{{ $user->email }}">
                                     <div class="invalid-feedback">
                                         {{__("Please fill in the email")}}
                                     </div>
+                                    @error("email")
+                                        <p class="invalid-feedback">{{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -63,21 +78,21 @@
                             <div class="row">
                                 <div class="form-group col-12">
                                     <label>{{__("Old Password")}}</label>
-                                    <input type="text" class="form-control" required="" value="{{ $user->name }}">
+                                    <input type="text" class="form-control" required="">
                                     <div class="invalid-feedback">
                                         {{__("Please fill in the first name")}}
                                     </div>
                                 </div>
                                 <div class="form-group col-12">
                                     <label>{{__("New Password")}}</label>
-                                    <input type="text" class="form-control" required="" value="{{ $user->email }}">
+                                    <input type="text" class="form-control" required="">
                                     <div class="invalid-feedback">
                                         {{__("Please fill in the email")}}
                                     </div>
                                 </div>
                                 <div class="form-group col-12">
                                     <label>{{__("Password Confirmation")}}</label>
-                                    <input type="text" class="form-control" required="" value="{{ $user->email }}">
+                                    <input type="text" class="form-control" required="">
                                     <div class="invalid-feedback">
                                         {{__("Please fill in the email")}}
                                     </div>
