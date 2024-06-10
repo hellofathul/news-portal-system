@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\AdminProfileUpdateRequest;
-use App\Traits\FileUploadTrait;
+use App\Models\Admin;
 use Illuminate\Http\Request;
+use App\Traits\FileUploadTrait;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\AdminProfileUpdateRequest;
+use App\Http\Requests\AdminUpdatePasswordRequest;
+use Illuminate\Validation\ValidationException;
 
 class ProfileController extends Controller
 {
@@ -60,9 +64,28 @@ class ProfileController extends Controller
     {
         // Handle image uploads
         $imagePath = $this->handleFileUpload($request, "image", $request->old_image);
-        dd($imagePath);
+
+        // Update data
+        $admin = Admin::findOrFail($id);
+        $admin->image = ! empty($imagePath) ? $imagePath : $request->old_image;
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->save();
+
+        return redirect()->back();
     }
 
+    /**
+     * Update password
+     */
+    public function updatePassword(AdminUpdatePasswordRequest $request, string $id)
+    {
+        $admin = Admin::findOrFail($id);
+        $admin->password = bcrypt($request->password);
+        $admin->save();
+
+        return redirect()->back();
+    }
     /**
      * Remove the specified resource from storage.
      */

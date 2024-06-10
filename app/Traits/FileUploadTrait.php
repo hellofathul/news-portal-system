@@ -16,16 +16,16 @@ trait FileUploadTrait
      * @param ?string $oldPath The path of the old file to be deleted (if any)
      * @return string|null The new file path or null if no file was uploaded
      */
-    public function handleFileUpload(Request $request, string $fieldName, ?string $oldPath = null, string $dir = "uploads") : String
+    public function handleFileUpload(Request $request, string $fieldName, ?string $oldPath = null, string $dir = "uploads") : ?String
     {
-        // Delete the existing image if exist
-        if ($oldPath && File::exists(public_path($oldPath))) {
-            File::delete(public_path($oldPath));
-        }
-
         // Check request has file
         if(!$request->hasFile($fieldName)) {
             return null;
+        }
+        
+        // Delete the existing image if exist
+        if ($oldPath && File::exists(public_path($oldPath))) {
+            File::delete(public_path($oldPath));
         }
 
         $file = $request->file($fieldName);
