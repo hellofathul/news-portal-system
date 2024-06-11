@@ -8,9 +8,10 @@ use App\Traits\FileUploadTrait;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Validation\ValidationException;
 use App\Http\Requests\AdminProfileUpdateRequest;
 use App\Http\Requests\AdminUpdatePasswordRequest;
-use Illuminate\Validation\ValidationException;
 
 class ProfileController extends Controller
 {
@@ -23,38 +24,6 @@ class ProfileController extends Controller
     {
         $user = Auth::guard("admin")->user();
         return view("admin.profile.index", compact("user"));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**
@@ -71,7 +40,7 @@ class ProfileController extends Controller
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->save();
-
+        toast(__('Updated successfully!'),'success')->width("300");
         return redirect()->back();
     }
 
@@ -83,14 +52,7 @@ class ProfileController extends Controller
         $admin = Admin::findOrFail($id);
         $admin->password = bcrypt($request->password);
         $admin->save();
-
+        toast(__('Updated successfully!'),'success')->width("300");
         return redirect()->back();
-    }
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

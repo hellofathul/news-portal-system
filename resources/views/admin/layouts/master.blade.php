@@ -51,9 +51,10 @@
     <script src="{{ asset('admin/assets/modules/moment.min.js')}}"></script>
     <script src="{{ asset('admin/assets/js/stisla.js')}}"></script>
 
-    <!-- JS Libraies -->
+    <!-- JS Libraries -->
     <script src="{{ asset('admin/assets/modules/summernote/summernote-bs4.js')}}"></script>
     <script src="{{ asset("admin/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js")}}"></script>
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 
     <!-- Template JS File -->
     <script src="{{ asset('admin/assets/js/scripts.js')}}"></script>
@@ -70,6 +71,7 @@
             success_callback: null          // Default: null
         });
     </script>
+    
     @stack("scripts")
 </body>
 
