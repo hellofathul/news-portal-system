@@ -9,7 +9,7 @@
         <div class="card-header">
             <h4>All Languages</h4>
             <div class="card-header-action">
-                <a href="#" class="btn btn-primary">
+                <a href="{{route("admin.language.create")}}" class="btn btn-primary">
                     <i class="fas fa-plus"></i> Create New
                 </a>
             </div>
