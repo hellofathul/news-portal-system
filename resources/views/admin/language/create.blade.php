@@ -20,14 +20,23 @@
                             <option value="{{ $key }}">{{ $language["name"] }}</option>
                         @endforeach
                     </select>
+                    @error("language")
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="">Name</label>
                     <input name="name" readonly type="text" class="form-control" id="name">
+                    @error("name")
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="">Slug</label>
                     <input name="slug" readonly type="text" class="form-control" id="slug">
+                    @error("slug")
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="">Default language?</label>
@@ -35,6 +44,9 @@
                         <option value="0">No</option>
                         <option value="1">Yes</option>
                     </select>
+                    @error("default")
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="">Status</label>
@@ -42,6 +54,9 @@
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>
                     </select>
+                    @error("status")
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
                 </div>
                 <button class="btn btn-primary" type="submit">Create</button>
             </form>
@@ -53,8 +68,8 @@
 <!-- jQuery: Set the value for slug and name input -->
 @push("scripts")
     <script>
-        $(document).ready(function() {
-            $("#language-select").on("change", function() {
+        $(document).ready(function () {
+            $("#language-select").on("change", function () {
                 let value = $(this).val();
                 let name = $(this).children(":selected").text();
                 $("#slug").val(value);

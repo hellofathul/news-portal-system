@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminStoreLanguageRequest;
+use App\Models\Language;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LanguageController extends Controller
 {
@@ -26,9 +29,17 @@ class LanguageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AdminStoreLanguageRequest $request)
     {
-        dd($request->all());    
+        $language = new Language();
+        $language->name = $request->name;
+        $language->language = $request->language;
+        $language->slug = $request->slug;
+        $language->default = $request->default;
+        $language->status = $request->status;
+        $language->save();
+        toast(__('Created successfully!'),'success')->width("300");
+        return redirect()->route("admin.language.index");
     }
 
     /**
