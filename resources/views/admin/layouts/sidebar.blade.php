@@ -18,9 +18,11 @@
                 <a href="#" class="nav-link"><i class="fas fa-fire"></i><span>Dashboard</span></a>
             </li>
             <li class="menu-header">Starter</li>
-            <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank
-                        Page</span></a></li>
+            <li><a class="nav-link" href="{{route("admin.language.index")}}"><i class="far fa-square"></i>
+                    <span>Languages</span></a></li>
 
+            <!-- <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank
+                        Page</span></a></li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i>
                     <span>Forms</span></a>
@@ -29,6 +31,6 @@
                     <li><a class="nav-link" href="forms-editor.html">Editor</a></li>
                     <li><a class="nav-link" href="forms-validation.html">Validation</a></li>
                 </ul>
-            </li>
+            </li> -->
     </aside>
 </div>
