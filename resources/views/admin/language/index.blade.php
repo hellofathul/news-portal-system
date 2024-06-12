@@ -41,7 +41,7 @@
                                     @if ($language->default == 1)
                                         <span class="badge badge-primary">{{__("Yes")}}</span>
                                     @else
-                                        <span class="badge badge-primary">{{__("No")}}</span>
+                                        <span class="badge badge-warning">{{__("No")}}</span>
                                     @endif
                                 </td>
                                 <td>
@@ -52,8 +52,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-secondary">Detail</a>
-                                    <a href="#" class="btn btn-secondary">Detail</a>
+                                    <a href="{{route("admin.language.edit", $language->id)}}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit</a>
+                                    <a href="{{route("admin.language.destroy", $language->id)}}" class="btn btn-danger"><i class="fas fa-trash"></i> Delete</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -69,7 +69,7 @@
     <script>
         $("#table-1").dataTable({
             "columnDefs": [
-                { "sortable": false, "targets": [2, 3] }
+                { "sortable": true, "targets": [2, 3] }
             ]
         });
     </script>
