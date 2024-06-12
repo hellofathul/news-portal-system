@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>General Dashboard &mdash; Stisla</title>
+    <title>Sinar Nasional &mdash; Backoffice</title>
 
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{asset('admin/assets/modules/bootstrap/css/bootstrap.min.css')}}">
@@ -12,6 +12,7 @@
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{asset('admin/assets/modules/summernote/summernote-bs4.css')}}">
+    <link rel="stylesheet" href="{{asset("admin/assets/modules/select2/dist/css/select2.min.css")}}">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}">
@@ -54,6 +55,7 @@
     <!-- JS Libraries -->
     <script src="{{ asset('admin/assets/modules/summernote/summernote-bs4.js')}}"></script>
     <script src="{{ asset("admin/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js")}}"></script>
+    <script src="{{ asset("admin/assets/modules/select2/dist/js/select2.full.min.js")}}"></script>
     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 
     <!-- Template JS File -->
